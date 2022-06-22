@@ -4,10 +4,11 @@
 class CAmodel:
     def __init__(self,size):
         self.size=size
-        self.matrix=[[None]*size for _ in range(size)]
+        self.matrix=[[0]*size for _ in range(size)]
+        self.matrix[1][1]=1
 
     def next_state(self):
-        self.next_matrix=[[None]*self.size for _ in range(self.size)]
+        self.next_matrix=[[0]*self.size for _ in range(self.size)]
         for x in range(self.size):
             for y in range(self.size):
                 correct_x=x+1
@@ -16,10 +17,10 @@ class CAmodel:
                     correct_x=0
                 if y==self.size-1:
                     correct_y=0
-                near=[self.matrix[x-1][y],self.matrix[x][y-1],self.matrix[correct_x][y],self.matrix[x][correct_y]].count(True)
+                near=[self.matrix[x-1][y],self.matrix[x][y-1],self.matrix[correct_x][y],self.matrix[x][correct_y]].count(1)
                 if near%2==0:
-                    self.next_matrix[x][y]=None
-                else:self.next_matrix[x][y]=True
+                    self.next_matrix[x][y]=0
+                else:self.next_matrix[x][y]=1
         self.matrix=self.next_matrix
 
     def print_list(self):
@@ -29,8 +30,8 @@ class CAmodel:
 
 if __name__=='__main__':
     model=CAmodel(5)
-    model.matrix[0][0]=True
-    model.matrix[4][0]=True
+    model.matrix[0][0]=1
+    model.matrix[4][0]=1
     for _ in range(10):
-        model.next_state()
         model.print_list()
+        model.next_state()
