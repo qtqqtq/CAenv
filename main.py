@@ -1,5 +1,5 @@
 import gym
-from CAenv.CAenv.envs.CAworld import CAEnv
+from CAworld import CAEnv
 from stable_baselines3 import A2C
 
 env =CAEnv(4)
