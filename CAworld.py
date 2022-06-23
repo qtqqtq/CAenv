@@ -14,11 +14,15 @@ class CAEnv(gym.Env):
         self.observation_space = spaces.Box(0,1,shape=(size,size),dtype=int)
         self.action_space = spaces.MultiDiscrete([size,size])
 
-
-
     def reset(self, seed=None, return_info=False, options=None):
         # We need the following line to seed self.np_random
         super().reset(seed=seed)
+        self.CA.__init__(self.size)
+        self.CA.matrix[0][2] = 1
+        self.CA.matrix[1][0] = 1
+        self.CA.matrix[1][2] = 1
+        self.CA.matrix[2][1] = 1
+        self.CA.matrix[2][2] = 1
         return self.CA.matrix
 
     def step(self, action):

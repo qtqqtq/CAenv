@@ -1,11 +1,11 @@
 import gym
 from CAworld import CAEnv
-from stable_baselines3 import A2C
+from stable_baselines3 import PPO
 
-env =CAEnv(4)
+env=CAEnv(4)
 
-model=A2C('MlpPolicy', env, verbose=1)
-model.learn(100000)
+model=PPO('MlpPolicy', env, verbose=1)
+model.learn(10000)
 
 observation= env.reset()
 
